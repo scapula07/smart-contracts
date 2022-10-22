@@ -17,15 +17,19 @@ contract VultriViusCollection is ERC721Enumerable, Ownable {
     uint256 public maxMintAmount = 5;
     bool public paused = false;
 
-    constructor() ERC721("Vultrivius NFT Collection", "V3X") {}
+    constructor() ERC721("Vultrivius NFT Collection", "V3X volume 1") {}
 
 
     function _baseURI() internal view virtual override returns (string memory) {
-    return "ipfs://QmYB5uWZqfunBq7yWnamTqoXWBAHiQoirNLmuxMzDThHhi/";
+    return "https://gateway.pinata.cloud/ipfs/QmbKWE65nNvczADYAb8KtwQcm7CseBwr33FPjgByBKvbXL/";
 
     }
+
+     event TokenID (
+        uint tokenid
+    );
     
-    function mint(address _to, uint256 _mintAmount) public payable {
+    function mintNft(address _to, uint256 _mintAmount)   public payable {
             uint256 supply = totalSupply();
             require(!paused);
             require(_mintAmount > 0);
@@ -34,6 +38,7 @@ contract VultriViusCollection is ERC721Enumerable, Ownable {
             
             for (uint256 i = 1; i <= _mintAmount; i++) {
                 _safeMint(_to, supply + i);
+                 emit TokenID (i);   
             }
     }
 
