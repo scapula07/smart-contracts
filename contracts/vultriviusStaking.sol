@@ -103,9 +103,10 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
    }
 
-   function transferNft(address _nftAddress,uint _tokenId)  external onlyOwner{
+   function transferNft(address _nftAddress,uint _tokenId,uint _num )  external onlyOwner{
        require( block.timestamp >= endTimer,"deadline is not yet reached");
-       IERC721(_nftAddress).transferFrom(address(this), msg.sender,_tokenId);
+       address winner =stakers[_num]
+       IERC721(_nftAddress).transferFrom(address(this), winner,_tokenId);
 
    }
 
